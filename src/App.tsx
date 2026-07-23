@@ -1,13 +1,17 @@
-import './index.css'
-import Home from "./pages/Home"
+import { Routes, Route } from "react-router-dom";
 
-function App() {
-  
+import { AppLayout } from "./components/layout/AppLayout";
+import Dashboard from "./pages/Home/Dashborad";
+import Product from "./pages/Home/Products";
 
+function App(){
   return (
-    <>
-      <Home/>
-    </>
+    <Routes>
+       <Route element={<AppLayout/>}>
+          <Route path="/" element={<Dashboard/>}/>
+          <Route path="/products" element={<Product/>}/>
+       </Route>
+    </Routes>
   )
 }
 
