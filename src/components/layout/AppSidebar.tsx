@@ -23,7 +23,7 @@ export function AppSidebar() {
         <div className="h-8 w-8 rounded-lg border-2 flex items-center justify-center">
           <TbMeat className="text-xl" />
         </div>
-        BoiGestor
+        FrigoTech 
       </h1>
 
       {/* Conteudo central */}
