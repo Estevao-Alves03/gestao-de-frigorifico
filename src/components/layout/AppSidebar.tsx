@@ -14,7 +14,7 @@ import CategoryForm from "../forms/CategoryForm";
 
 import { TbMeat } from "react-icons/tb";
 import { BsFillBoxFill } from "react-icons/bs";
-import { MdOutlineDashboard, MdLogout } from "react-icons/md";
+import { MdOutlineDashboard, MdLogout, MdOutlineShoppingCart } from "react-icons/md";
 import { GoGear } from "react-icons/go";
 import { LuHandshake } from "react-icons/lu";
 import { ChevronDown } from "lucide-react";
@@ -104,6 +104,26 @@ export function AppSidebar() {
                 >
                   <LuHandshake />
                   Fornecedores
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+
+                {/* Fornecedores */}
+              <SidebarMenuItem>
+                <SidebarMenuButton
+                  render={<Link to="/sales" />}
+                  className="
+                    h-11
+                    rounded-lg
+                    text-sm
+                    font-medium
+                    transition-all
+                    hover:bg-primary/10
+                    hover:text-primary
+                    gap-4
+                  "
+                >
+                  <MdOutlineShoppingCart />
+                  Venda
                 </SidebarMenuButton>
               </SidebarMenuItem>
 

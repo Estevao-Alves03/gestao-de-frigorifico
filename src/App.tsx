@@ -4,6 +4,7 @@ import { AppLayout } from "./components/layout/AppLayout";
 import Dashboard from "./pages/Dashboard/Dashborad";
 import Product from "./pages/Products/Products";
 import Suppliers from "./pages/Contact/Suppliers";
+import Sales from "./pages/Sale/Sales";
 
 function App(){
   return (
@@ -12,6 +13,7 @@ function App(){
           <Route path="/" element={<Dashboard/>}/>
           <Route path="/products" element={<Product/>}/>
           <Route path="/suppliers" element={<Suppliers/>}/>
+          <Route path="/sales" element={<Sales/>}/>
        </Route>
     </Routes>
   )

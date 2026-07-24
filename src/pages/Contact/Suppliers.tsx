@@ -4,10 +4,14 @@ import { FaPencil } from "react-icons/fa6";
 import { IoTrashOutline } from "react-icons/io5";
 import { Card, CardHeader, CardContent } from "../../components/ui/card";
 import { suppliers } from "../../data/suppliers";
+import { useState } from "react";
+import SuppliersModal from "../../components/common/SuppliersModal";
 
 export default function Suppliers() {
   
   const gridColumns = "grid grid-cols-[3fr_2fr_2fr_2fr_1.5fr_1fr]";
+
+  const [openModalSuppliers, setOpenModalSuppliers] = useState(false)
 
   return (
     <div className="p-7 pt-8">
@@ -23,7 +27,9 @@ export default function Suppliers() {
         </section>
 
         <section>
-          <Button className="text-sm items-center flex h-10 w-40">
+          <Button 
+          onClick={() => setOpenModalSuppliers(true)}
+          className="text-sm items-center flex h-10 w-40">
             <GoPlus />
             Novo Fornecedor
           </Button>
@@ -109,6 +115,12 @@ export default function Suppliers() {
           ))}
         </CardContent>
       </Card>
+      
+      <SuppliersModal
+      open={openModalSuppliers}
+      onClose={() => setOpenModalSuppliers(false)}
+      >        
+      </SuppliersModal>
     </div>
   );
 }

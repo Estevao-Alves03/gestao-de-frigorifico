@@ -8,7 +8,8 @@ export default function Header() {
     "/": "Dashboard",
     "/products": "Produtos",
     "/settings": "Configurações",
-    "/suppliers": "Fornecedores"
+    "/suppliers": "Fornecedores",
+    "/sales": "Venda"
   }
 
   const currentPage = pages[location.pathname] || "Página"
