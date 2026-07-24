@@ -7,7 +7,8 @@ export default function Header() {
   const pages: Record<string, string> = {
     "/": "Dashboard",
     "/products": "Produtos",
-    "/settings": "Configurações"
+    "/settings": "Configurações",
+    "/suppliers": "Fornecedores"
   }
 
   const currentPage = pages[location.pathname] || "Página"

@@ -1,0 +1,31 @@
+export const products = [
+  {
+    id: 1,
+    name: "Picanha Premium",
+    categoryId: 1,
+    cutId: 1,
+    supplierId: 1,
+    lot: "LOTE-20260701",
+    entryDate: "2026-07-01",
+    expirationDate: "2027-01-01",
+    weight: 120,
+    quantity: 10,
+    purchasePrice: 35.90,
+    salePrice: 59.90,
+  },
+
+  {
+    id: 2,
+    name: "Contra Filé",
+    categoryId: 1,
+    cutId: 3,
+    supplierId: 2,
+    lot: "LOTE-20260705",
+    entryDate: "2026-07-05",
+    expirationDate: "2027-01-05",
+    weight: 200,
+    quantity: 15,
+    purchasePrice: 32.50,
+    salePrice: 54.90,
+  },
+];
