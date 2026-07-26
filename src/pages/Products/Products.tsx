@@ -1,88 +1,123 @@
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { Button } from "../../components/ui/button";
-import { GoPlus } from "react-icons/go";
-import { FaPencil } from "react-icons/fa6";
-import { IoTrashOutline } from "react-icons/io5";
 import { useState } from "react";
-import ProductsModal from "../../components/common/ProductsModal";
 import { products } from "../../data/products";
+import { cuts } from "../../data/cuts";
+import PageHeader from "../../components/layout/PageHeader";
+import ProductsModal from "../../components/common/modals/ProductsModal";
+import TableActions from "../../components/common/TableActions";
+import TableCard from "../../components/common/TableCard";
+import TableEmpty from "../../components/common/TableEmpty";
+import { Button } from "../../components/ui/button";
 
 export default function Product() {
- 
+  const gridColumns = "grid grid-cols-[1.3fr_1fr_1fr_1fr_1fr_1fr_1fr]";
   const [openModalProducts, setOpenModalProducts] = useState(false);
+
+  const produtosEmEstoque = products.filter(
+    (product) => product.quantidade > 0,
+  );
+
+  const produtosSemEstoque = products.filter(
+    (product) => product.quantidade === 0,
+  );
+
+  function getCorteNome(corteId: number) {
+    const corte = cuts.find((cut) => cut.id === corteId);
+
+    return corte?.nome ?? "sem nome";
+  }
 
   return (
     <div className="p-7 pt-8">
       {/* Titulo */}
-      <header className="flex items-center justify-between">
-        <section>
-          <h1 className="text-gray-900 font-medium text-xl font-sans">
-            Produtos
-          </h1>
-          <p className="text-sm font-sans text-gray-600">
-            Gerencie os itens do seu estoque.
-          </p>
-        </section>
-
-        <section>
-          <Button
-            onClick={() => setOpenModalProducts(true)}
-            className="text-sm items-center flex h-10 w-40"
-          >
-            <GoPlus />
-            Novo Produto
-          </Button>
-        </section>
-      </header>
+      <PageHeader
+        title="Produtos"
+        description="Gerencie os itens do seu estoque"
+        buttonText="Novo Produto"
+        onButtonClick={() => setOpenModalProducts(true)}
+      />
 
       {/* conteudo */}
-      <Card className="mt-8 border-gray-300 shadow-">
-        <CardHeader className="grid grid-cols-[2fr_1fr_1fr_1fr] items-center border-b border-gray-300 pb-4">
-          <h1 className="text-muted-foreground font-medium">Nome</h1>
-          <h1 className="text-muted-foreground font-medium">Preço</h1>
-          <h1 className="text-muted-foreground font-medium text-center">
-            Quantidade
-          </h1>
-          <h1 className="text-muted-foreground font-medium text-right pr-8">
-            Ações
-          </h1>
-        </CardHeader>
-        <CardContent className="p-0">
-          <div>
-            {products.map((product) => (
+      {produtosEmEstoque.length === 0 ? (
+        <TableEmpty
+          title="Nenhum produto cadastrado"
+          description="Adicione seus produtos para começar a gerenciar o estoque e acompanhar suas movimentações."
+        />
+      ) : (
+        <>
+          <TableCard
+            gridColumns={gridColumns}
+            headers={[
+              "Nome",
+              "Peso",
+              "Corte",
+              "Quantidade",
+              "Venda",
+              "Validade",
+              <div className="flex justify-center">Ações</div>,
+            ]}
+          >
+            {produtosEmEstoque.map((product) => (
               <div
                 key={product.id}
-                className="grid grid-cols-[2fr_1fr_1fr_1fr] items-center border-b border-gray-300 px-6 py-3 last:border-b-0 text-muted-foreground hover:bg-gray-100"
+                className={`${gridColumns} items-center px-6 py-3 border-b border-gray-300 hover:bg-gray-100 last:border-b-0`}
               >
-                <p>{product.name}</p>
-                <p>R$ {product.salePrice}</p>
-                <p className="text-center">
-                  <span
-                    className={
-                      product.quantity === 0
-                        ? "text-red-400 bg-red-200 rounded-lg px-3 py-1"
-                        : "text-muted-foreground"
-                    }
-                  >
-                    {product.quantity === 0
-                      ? "Sem estoque"
-                      : `${product.quantity} Un`}
-                  </span>
-                </p>
-
-                <div className="justify-self-end flex gap-1">
-                  <button className="border-transparent border p-2 rounded-md hover:bg-gray-200">
-                    <FaPencil className="" />
-                  </button>
-                  <button className="border-transparent border p-2 rounded-md hover:bg-red-200">
-                    <IoTrashOutline className="text-red-500" />
-                  </button>
-                </div>
+                <p className="font-medium">{product.nome}</p>
+                <p className="font-medium">{product.peso}</p>
+                <p className="font-medium">{getCorteNome(product.corteId)}</p>
+                <p className="font-medium">{product.quantidade}</p>
+                <p className="font-medium">{product.precoVenda}</p>
+                <p className="font-medium">{product.dataValidade}</p>
+                <TableActions />
               </div>
             ))}
-          </div>
-        </CardContent>
-      </Card>
+          </TableCard>
+
+          {produtosSemEstoque.length > 0 && (
+            <>
+              <div className="mt-8 mb-6">
+                <h2 className="text-xl font-bold font-serif">
+                  Produtos sem estoque
+                </h2>
+                <p className="text-lg font-serif text-gray-600">
+                  Gerencie os itens que precisam de reposição.
+                </p>
+              </div>
+
+              <TableCard
+                gridColumns="grid grid-cols-4"
+                headers={[
+                  "Nome",
+                  "Corte",
+                  <div className="flex justify-center">Quantidade</div>,
+                  <div className="flex justify-center">Ações</div>,
+                ]}
+              >
+                {produtosSemEstoque.map((product) => (
+                  <div
+                    key={product.id}
+                    className="grid grid-cols-4 items-center border-b last:border-b-0 border-gray-300 hover:bg-gray-100 px-6 py-3"
+                  >
+                    <p className="font-medium">{product.nome}</p>
+                    <p className="font-medium">{getCorteNome(product.corteId)}</p>
+
+                    <div className="flex justify-center">
+                      <span className="rounded-xl bg-red-200 text-red-700 px-3 py-1">
+                        Sem estoque
+                      </span>
+                    </div>
+
+                    <div className="flex justify-center">
+                      <Button className="py-4 px-5 bg-transparent text-gray-500 border border-gray-300 transition-all duration-300 ease-in-out hover:bg-gray-500 hover:text-white font-medium">
+                        Repor estoque
+                      </Button>
+                    </div>
+                  </div>
+                ))}
+              </TableCard>
+            </>
+          )}
+        </>
+      )}
       {/* componente modal */}
       <ProductsModal
         open={openModalProducts}

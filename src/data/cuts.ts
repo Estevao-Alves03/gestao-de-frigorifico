@@ -1,18 +1,34 @@
 export const cuts = [
   {
     id: 1,
-    name: "Picanha",
+    nome: "Picanha",
   },
   {
     id: 2,
-    name: "Alcatra",
+    nome: "Alcatra",
   },
   {
     id: 3,
-    name: "Contra Filé",
+    nome: "Contra Filé",
   },
   {
     id: 4,
-    name: "Costela",
+    nome: "Peito",
+  },
+  {
+    id: 5,
+    nome: "Coxa e Sobrecoxa",
+  },
+  {
+    id: 6,
+    nome: "Lombo",
+  },
+  {
+    id: 7,
+    nome: "Costela",
+  },
+  {
+    id: 8,
+    nome: "Filé",
   },
 ];

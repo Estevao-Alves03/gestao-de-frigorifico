@@ -1,21 +1,14 @@
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "../ui/card";
-
 import { IoMdClose } from "react-icons/io";
-import SuppliersForm from "../forms/SuppliersForm";
+import ProductForm from "../../forms/ProductForm";
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "../../ui/card";
 
-interface SuppliersModalProps {
+interface ProductModalProps {
   open: boolean;
 
   onClose: () => void;
 }
 
-export default function SuppliersModal({ open, onClose }: SuppliersModalProps) {
+export default function ProductModal({ open, onClose }: ProductModalProps) {
   if (!open) return null;
 
   return (
@@ -33,14 +26,15 @@ export default function SuppliersModal({ open, onClose }: SuppliersModalProps) {
     >
       <Card
         className="
-          w-137.5
+          w-230
           max-h-[90vh]
           overflow-y-auto
+        border-gray-400 shadow-xl border
         "
       >
         <CardHeader>
           <div className="flex justify-between items-center">
-            <CardTitle>Novo Fornecedor</CardTitle>
+            <CardTitle className="text-xl font-bold font-serif">Novo Produto</CardTitle>
 
             <button
               onClick={onClose}
@@ -50,11 +44,11 @@ export default function SuppliersModal({ open, onClose }: SuppliersModalProps) {
             </button>
           </div>
 
-          <CardDescription>Preencha os dados do Fornecedor</CardDescription>
+          <CardDescription className="text-lg font-serif">Preencha os dados do produto</CardDescription>
         </CardHeader>
 
         <CardContent>
-          <SuppliersForm onCancel={onClose} />
+          <ProductForm onCancel={onClose} />
         </CardContent>
       </Card>
     </div>

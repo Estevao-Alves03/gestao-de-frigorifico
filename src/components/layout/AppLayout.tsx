@@ -10,7 +10,7 @@ export function AppLayout() {
 
       <SidebarInset>
         <Header />
-        <main className="flex-1">
+        <main className="flex-1 pb-10">
           <Outlet />
         </main>
       </SidebarInset>

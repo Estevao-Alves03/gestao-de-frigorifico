@@ -1,12 +1,5 @@
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "../ui/card";
-
 import { IoMdClose } from "react-icons/io";
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "../../ui/card";
 
 interface CategoryModalProps {
   open: boolean;
@@ -34,10 +27,10 @@ export default function CategoryModal({
         p-4
       "
     >
-      <Card className="w-96">
+      <Card className="w-120 border-gray-400 shadow-xl border">
         <CardHeader>
           <div className="flex justify-between items-center">
-            <CardTitle>
+            <CardTitle className="text-xl font-bold font-serif">
               Nova Categoria
             </CardTitle>
 
@@ -49,7 +42,7 @@ export default function CategoryModal({
             </button>
           </div>
 
-          <CardDescription>
+          <CardDescription className="text-lg font-serif">
             Cadastre uma nova categoria
           </CardDescription>
         </CardHeader>

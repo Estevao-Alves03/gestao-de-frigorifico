@@ -1,0 +1,32 @@
+export const sales = [
+  {
+    id: 1,
+    numeroCompra: "V-0001",
+    cliente: "Ana Maria Braga",
+    data: "2026-07-25",
+    quantidadeItens: 5,
+    total: 850.00,
+    pagamento: "Pix",
+    status: "Concluído",
+  },
+  {
+    id: 2,
+    numeroCompra: "V-0002",
+    cliente: "Celso Portinhole",
+    data: "2026-07-24",
+    quantidadeItens: 12,
+    total: 2350.50,
+    pagamento: "Cartão de crédito",
+    status: "Pendente",
+  },
+  {
+    id: 3,
+    numeroCompra: "V-0003",
+    cliente: "Ratinho",
+    data: "2026-07-23",
+    quantidadeItens: 8,
+    total: 1420.00,
+    pagamento: "Dinheiro",
+    status: "Cancelado",
+  },
+];

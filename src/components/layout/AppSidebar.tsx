@@ -9,7 +9,7 @@ import {
   SidebarFooter,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import CategoryModal from "../common/CategoryModal";
+
 import CategoryForm from "../forms/CategoryForm";
 
 import { TbMeat } from "react-icons/tb";
@@ -25,8 +25,10 @@ import {
   CollapsibleTrigger,
 } from "../ui/collapsible";
 import { useState } from "react";
-import CutsModal from "../common/CutsModal";
 import CutsForm from "../forms/CutsForm";
+import { FaUserPlus } from "react-icons/fa6";
+import CategoryModal from "../common/modals/CategoryModal";
+import CutsModal from "../common/modals/CutsModal";
 
 export function AppSidebar() {
   const [openCategoryModal, setOpenCategoryModal] = useState(false); // modal das categorias
@@ -107,7 +109,27 @@ export function AppSidebar() {
                 </SidebarMenuButton>
               </SidebarMenuItem>
 
-                {/* Fornecedores */}
+                {/* Clientes */}
+              <SidebarMenuItem>
+                <SidebarMenuButton
+                  render={<Link to="/clients" />}
+                  className="
+                    h-11
+                    rounded-lg
+                    text-sm
+                    font-medium
+                    transition-all
+                    hover:bg-primary/10
+                    hover:text-primary
+                    gap-4
+                  "
+                >
+                  <FaUserPlus />
+                  Clientes
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+
+                {/* Vendas */}
               <SidebarMenuItem>
                 <SidebarMenuButton
                   render={<Link to="/sales" />}
@@ -126,6 +148,9 @@ export function AppSidebar() {
                   Venda
                 </SidebarMenuButton>
               </SidebarMenuItem>
+
+
+              
 
               {/* Cadastros */}
               <SidebarMenuItem>

@@ -8,16 +8,12 @@ import {
 import { BsFillBoxFill } from "react-icons/bs";
 import { TbPigMoney } from "react-icons/tb";
 import { MdOutlineHive } from "react-icons/md";
+import PageHeader from "../../components/layout/PageHeader";
 
 export default function Dashboard() {
   return (
     <div className="p-7 pt-8">
-      <header>
-        <h1 className="font-medium text-xl font-sans">Dashboard</h1>
-        <p className="text-sm font-sans text-gray-600">
-          Visão geral do seu estoque.
-        </p>
-      </header>
+      <PageHeader title="Dashboard" description="Visão geral do seu estoque" />
 
       <section className="grid grid-cols-3 gap-4 mt-8">
         {/* 1 Card */}
@@ -81,9 +77,7 @@ export default function Dashboard() {
             </section>
             <p>Ultimos 8 meses</p>
           </CardHeader>
-          <CardContent>
-            
-          </CardContent>
+          <CardContent></CardContent>
         </Card>
       </main>
     </div>

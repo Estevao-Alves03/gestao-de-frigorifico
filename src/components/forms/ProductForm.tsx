@@ -2,6 +2,7 @@ import { Button } from "../ui/button";
 import { categories } from "../../data/categories";
 import { cuts } from "../../data/cuts";
 import { suppliers } from "../../data/suppliers";
+import { Label } from "../ui/label";
 
 interface ProductFormProps {
   onCancel: () => void;
@@ -12,22 +13,22 @@ export default function ProductForm({ onCancel }: ProductFormProps) {
     <form className="space-y-4">
       {/* Nome */}
       <div className="flex flex-col gap-2">
-        <label>Nome</label>
+        <Label>Nome</Label>
 
         <input
           name="name"
           type="text"
           placeholder="Ex: Contra-Filé"
-          className="border rounded-md p-2"
+          className="border rounded-md p-2.5 border-gray-300 shadow-lg"
         />
       </div>
 
       {/* Categoria e Corte */}
       <section className="grid grid-cols-2 gap-3">
         <div className="flex flex-col gap-2">
-          <label>Categoria</label>
+          <Label>Categoria</Label>
 
-          <select name="category" className="border rounded-md p-2">
+          <select name="category" className="border rounded-md p-2.5 border-gray-300 shadow-lg">
             <option value="">Selecione</option>
 
             {categories.map((category) => (
@@ -39,14 +40,14 @@ export default function ProductForm({ onCancel }: ProductFormProps) {
         </div>
 
         <div className="flex flex-col gap-2">
-          <label>Corte</label>
+          <Label>Corte</Label>
 
-          <select name="cut" className="border rounded-md p-2">
+          <select name="cut" className="border rounded-md p-2.5 border-gray-300 shadow-lg">
             <option value="">Selecione</option>
 
             {cuts.map((cut) => (
               <option key={cut.id} value={cut.id}>
-                {cut.name}
+                {cut.nome}
               </option>
             ))}
           </select>
@@ -56,27 +57,27 @@ export default function ProductForm({ onCancel }: ProductFormProps) {
       {/* Fornecedor e lote */}
       <section className="grid grid-cols-2 gap-3">
         <div className="flex flex-col gap-2">
-          <label>Fornecedor</label>
+          <Label>Fornecedor</Label>
 
-          <select name="supplier" className="border rounded-md p-2">
+          <select name="supplier" className="border rounded-md p-2.5 border-gray-300 shadow-lg">
             <option value="">Selecione</option>
 
             {suppliers.map((supplier) => (
               <option key={supplier.id} value={supplier.id}>
-                {supplier.name}
+                {supplier.company}
               </option>
             ))}
           </select>
         </div>
 
         <div className="flex flex-col gap-2">
-          <label>Lote</label>
+          <Label>NF - Lote</Label>
 
           <input
             name="batch"
             type="text"
             placeholder="Lote - 20260723-01"
-            className="border rounded-md p-2"
+            className="border rounded-md p-2.5 border-gray-300 shadow-lg"
           />
         </div>
       </section>
@@ -84,22 +85,22 @@ export default function ProductForm({ onCancel }: ProductFormProps) {
       {/* Datas */}
       <section className="grid grid-cols-2 gap-3">
         <div className="flex flex-col gap-2">
-          <label>Data de entrada</label>
+          <Label>Data de entrada</Label>
 
           <input
             name="entry_date"
             type="date"
-            className="border rounded-md p-2"
+            className="border rounded-md p-2.5 border-gray-300 shadow-lg"
           />
         </div>
 
         <div className="flex flex-col gap-2">
-          <label>Validade</label>
+          <Label>Validade</Label>
 
           <input
             name="expiration_date"
             type="date"
-            className="border rounded-md p-2"
+            className="border rounded-md p-2.5 border-gray-300 shadow-lg"
           />
         </div>
       </section>
@@ -107,24 +108,24 @@ export default function ProductForm({ onCancel }: ProductFormProps) {
       {/* Peso e quantidade */}
       <section className="grid grid-cols-2 gap-3">
         <div className="flex flex-col gap-2">
-          <label>Peso (kg)</label>
+          <Label>Peso (kg)</Label>
 
           <input
             name="weight"
             type="number"
             placeholder="0"
-            className="border rounded-md p-2"
+            className="border rounded-md p-2.5 border-gray-300 shadow-lg"
           />
         </div>
 
         <div className="flex flex-col gap-2">
-          <label>Quantidade</label>
+          <Label>Quantidade</Label>
 
           <input
             name="quantity"
             type="number"
             placeholder="0"
-            className="border rounded-md p-2"
+            className="border rounded-md p-2.5 border-gray-300 shadow-lg"
           />
         </div>
       </section>
@@ -132,37 +133,37 @@ export default function ProductForm({ onCancel }: ProductFormProps) {
       {/* Preços */}
       <section className="grid grid-cols-2 gap-3">
         <div className="flex flex-col gap-2">
-          <label>Preço de compra</label>
+          <Label>Preço de compra</Label>
 
           <input
             name="purchase_price"
             type="number"
             step="0.01"
             placeholder="R$ 0,00"
-            className="border rounded-md p-2"
+            className="border rounded-md p-2.5 border-gray-300 shadow-lg"
           />
         </div>
 
         <div className="flex flex-col gap-2">
-          <label>Preço de venda</label>
+          <Label>Preço de venda</Label>
 
           <input
             name="sale_price"
             type="number"
             step="0.01"
             placeholder="R$ 0,00"
-            className="border rounded-md p-2"
+            className="border rounded-md p-2.5 border-gray-300 shadow-lg"
           />
         </div>
       </section>
 
       {/* Botões */}
-      <div className="flex justify-end gap-3 pt-4">
-        <Button type="button" variant="outline" onClick={onCancel}>
+      <div className="flex justify-end gap-3 pt-4 ">
+        <Button className="py-5 px-6 font-bold font-serif cursor-pointer" type="button" variant="outline" onClick={onCancel}>
           Cancelar
         </Button>
 
-        <Button type="submit">Salvar</Button>
+        <Button className="py-5 px-6 font-bold font-serif cursor-pointer" type="submit">Salvar</Button>
       </div>
     </form>
   );
