@@ -1,7 +1,7 @@
 export const products = [
   {
     id: 1,
-    nome: "Picanha Premium",
+    nomeProduto: "Picanha Premium",
     categoriaId: 1,
     corteId: 1,
     fornecedorId: 1,
@@ -15,7 +15,7 @@ export const products = [
   },
   {
     id: 2,
-    nome: "Alcatra",
+    nomeProduto: "Alcatra",
     categoriaId: 1,
     corteId: 2,
     fornecedorId: 2,
@@ -29,7 +29,7 @@ export const products = [
   },
   {
     id: 3,
-    nome: "Contrafilé",
+    nomeProduto: "Contrafilé",
     categoriaId: 1,
     corteId: 3,
     fornecedorId: 1,
@@ -43,7 +43,7 @@ export const products = [
   },
   {
     id: 4,
-    nome: "Peito de Frango",
+    nomeProduto: "Peito de Frango",
     categoriaId: 2,
     corteId: 4,
     fornecedorId: 3,
@@ -57,7 +57,7 @@ export const products = [
   },
   {
     id: 5,
-    nome: "Coxa e Sobrecoxa",
+    nomeProduto: "Coxa e Sobrecoxa",
     categoriaId: 2,
     corteId: 5,
     fornecedorId: 3,
@@ -71,7 +71,7 @@ export const products = [
   },
   {
     id: 6,
-    nome: "Lombo Suíno",
+    nomeProduto: "Lombo Suíno",
     categoriaId: 3,
     corteId: 6,
     fornecedorId: 2,
@@ -85,7 +85,7 @@ export const products = [
   },
   {
     id: 7,
-    nome: "Costela Suína",
+    nomeProduto: "Costela Suína",
     categoriaId: 3,
     corteId: 7,
     fornecedorId: 2,
@@ -99,7 +99,7 @@ export const products = [
   },
   {
     id: 8,
-    nome: "Tilápia Filé",
+    nomeProduto: "Tilápia Filé",
     categoriaId: 4,
     corteId: 8,
     fornecedorId: 4,

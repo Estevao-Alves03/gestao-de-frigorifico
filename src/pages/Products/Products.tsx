@@ -11,12 +11,13 @@ import { Button } from "../../components/ui/button";
 export default function Product() {
   const gridColumns = "grid grid-cols-[1.3fr_1fr_1fr_1fr_1fr_1fr_1fr]";
   const [openModalProducts, setOpenModalProducts] = useState(false);
+  const [productList, setProductList] = useState(products)
 
-  const produtosEmEstoque = products.filter(
+  const produtosEmEstoque = productList.filter(
     (product) => product.quantidade > 0,
   );
 
-  const produtosSemEstoque = products.filter(
+  const produtosSemEstoque = productList.filter(
     (product) => product.quantidade === 0,
   );
 
@@ -24,6 +25,20 @@ export default function Product() {
     const corte = cuts.find((cut) => cut.id === corteId);
 
     return corte?.nome ?? "sem nome";
+  }
+
+  const addProduct = (newProduct: Omit<(typeof products)[number], "id">) => {
+    setProductList((prev) => [
+      ...prev,
+      {
+        id: prev.length + 1,
+        ...newProduct
+      }
+    ])
+  }
+
+  const removeProduct = (id: number) => {
+    setProductList((prev) => prev.filter((product) => product.id !== id))
   }
 
   return (
@@ -61,13 +76,15 @@ export default function Product() {
                 key={product.id}
                 className={`${gridColumns} items-center px-6 py-3 border-b border-gray-300 hover:bg-gray-100 last:border-b-0`}
               >
-                <p className="font-medium">{product.nome}</p>
-                <p className="font-medium">{product.peso}</p>
+                <p className="font-medium">{product.nomeProduto}</p>
+                <p className="font-medium">{product.peso} Kg</p>
                 <p className="font-medium">{getCorteNome(product.corteId)}</p>
                 <p className="font-medium">{product.quantidade}</p>
-                <p className="font-medium">{product.precoVenda}</p>
+                <p className="font-medium">R$ {product.precoVenda}</p>
                 <p className="font-medium">{product.dataValidade}</p>
-                <TableActions />
+                <TableActions 
+                onDelet={() => removeProduct(product.id)}
+                />
               </div>
             ))}
           </TableCard>
@@ -97,7 +114,7 @@ export default function Product() {
                     key={product.id}
                     className="grid grid-cols-4 items-center border-b last:border-b-0 border-gray-300 hover:bg-gray-100 px-6 py-3"
                   >
-                    <p className="font-medium">{product.nome}</p>
+                    <p className="font-medium">{product.nomeProduto}</p>
                     <p className="font-medium">{getCorteNome(product.corteId)}</p>
 
                     <div className="flex justify-center">
@@ -122,6 +139,7 @@ export default function Product() {
       <ProductsModal
         open={openModalProducts}
         onClose={() => setOpenModalProducts(false)}
+        onAddProduct={addProduct}
       />
     </div>
   );

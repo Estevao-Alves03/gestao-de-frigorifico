@@ -6,22 +6,56 @@ import SuppliersModal from "../../components/common/modals/SuppliersModal";
 import TableActions from "../../components/common/TableActions";
 import TableCard from "../../components/common/TableCard";
 import TableEmpty from "../../components/common/TableEmpty";
+import { addresses } from "../../data/addresses";
 
 export default function Suppliers() {
   const grid = "grid grid-cols-[3.8fr_2fr_2fr_2fr_1fr_1fr]";
 
   const [openModalSuppliers, setOpenModalSuppliers] = useState(false);
   const [search, setSearch] = useState("");
+  const [suppliersList, setSuppliersList] = useState(suppliers);
+  const [addressesList, setAddressesList] = useState(addresses)
 
-  const fornecedoresFiltrados = suppliers.filter((supplier) => {
+  const fornecedoresFiltrados = suppliersList.filter((supplier) => {
     const busca = search.toLowerCase();
 
     return (
-      supplier.company.toLowerCase().includes(busca) ||
-      supplier.phone.includes(busca) ||
-      supplier.responsible.toLowerCase().includes(busca)
+      supplier.empresa.toLowerCase().includes(busca) ||
+      supplier.telefone.includes(busca) ||
+      supplier.responsavel.toLowerCase().includes(busca)
     );
   });
+
+  const AddSupplier = (
+    newSupplier: Omit<(typeof suppliers)[number], "id" | "status">,
+  ) => {
+    setSuppliersList((prev) => [
+      ...prev,
+      {
+        id: prev.length + 1,
+        status: true,
+        ...newSupplier,
+      },
+    ]);
+  };
+
+  const addAddress = (newAddress: Omit<(typeof addresses)[number], "id">) => {
+  const newId = addressesList.length + 1;
+
+  setAddressesList((prev) => [
+    ...prev,
+    {
+      id: newId,
+      ...newAddress,
+    },
+  ]);
+
+  return newId;
+};
+
+  const removeSuppliers = (id: number) => {
+    setSuppliersList((prev) => prev.filter((supplier) => supplier.id !== id));
+  };
 
   return (
     <div className="p-7 pt-8">
@@ -32,12 +66,6 @@ export default function Suppliers() {
         buttonText="Novo Fornecedor"
         onButtonClick={() => setOpenModalSuppliers(true)}
       />
-      {/* pesquisa */}
-      <Search
-        placeholder="Buscar por responsável, empresa ou telefone"
-        value={search}
-        onChange={setSearch}
-      />
 
       {/* conteudo */}
       {fornecedoresFiltrados.length === 0 ? (
@@ -46,46 +74,68 @@ export default function Suppliers() {
           description="Cadastre seus fornecedores para organizar seus parceiros comerciais e facilitar o controle do estoque."
         />
       ) : (
-        <TableCard
-          gridColumns={grid}
-          headers={[
-            "Empresa",
-            "Responsável",
-            "Telefone",
-            "Cidade",
-            "Status",
-            <div className="flex justify-center">Ações</div>,
-          ]}
-        >
-          {fornecedoresFiltrados.map((suppliers) => (
-            <div
-              key={suppliers.id}
-              className={`${grid} items-center border-b border-gray-300 hover:bg-gray-100 px-6 py-3 last:border-b-0`}
-            >
-              <p className="font-medium">{suppliers.company}</p>
-              <p className="font-medium">{suppliers.responsible}</p>
-              <p className="font-medium">{suppliers.phone}</p>
-              <p className="font-medium">{suppliers.city}</p>
-              <div className="flex justify-start">
-                <span
-                  className={
-                    suppliers.status
-                      ? "rounded-xl text-emerald-700 bg-emerald-200 px-3 py-1"
-                      : "rounded-xl text-gray-500 bg-gray-200 px-3 py-1"
-                  }
+        <>
+          {/* pesquisa */}
+          <Search
+            placeholder="Buscar por responsável, empresa ou telefone"
+            value={search}
+            onChange={setSearch}
+          />
+
+          <TableCard
+            gridColumns={grid}
+            headers={[
+              "Empresa",
+              "Responsável",
+              "Telefone",
+              "Cidade",
+              "Status",
+              <div className="flex justify-center">Ações</div>,
+            ]}
+          >
+            {fornecedoresFiltrados.map((supplier) => {
+              const endereco = addresses.find(
+                (address) => address.id === supplier.enderecoId,
+              );
+
+              return (
+                <div
+                  key={supplier.id}
+                  className={`${grid} items-center border-b border-gray-300 hover:bg-gray-100 px-6 py-3 last:border-b-0`}
                 >
-                  {suppliers.status ? "Ativo" : "Inativo"}
-                </span>
-              </div>
-              <TableActions />
-            </div>
-          ))}
-        </TableCard>
+                  <p className="font-medium">{supplier.empresa}</p>
+
+                  <p className="font-medium">{supplier.responsavel}</p>
+
+                  <p className="font-medium">{supplier.telefone}</p>
+
+                  <p className="font-medium">{endereco?.cidade}</p>
+
+                  <div className="flex justify-start">
+                    <span
+                      className={
+                        supplier.status
+                          ? "rounded-xl text-emerald-700 bg-emerald-200 px-3 py-1"
+                          : "rounded-xl text-gray-500 bg-gray-200 px-3 py-1"
+                      }
+                    >
+                      {supplier.status ? "Ativo" : "Inativo"}
+                    </span>
+                  </div>
+
+                  <TableActions onDelet={() => removeSuppliers(supplier.id)} />
+                </div>
+              );
+            })}
+          </TableCard>
+        </>
       )}
 
       <SuppliersModal
         open={openModalSuppliers}
         onClose={() => setOpenModalSuppliers(false)}
+        onAddSupplier={AddSupplier}
+        onAddAddress={addAddress}
       ></SuppliersModal>
     </div>
   );

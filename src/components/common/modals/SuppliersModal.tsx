@@ -9,12 +9,31 @@ import {
 } from "../../ui/card";
 
 interface SuppliersModalProps {
-  open: boolean;
+  open:boolean;
+  onClose:()=>void;
 
-  onClose: () => void;
+  onAddSupplier:(supplier:{
+    empresa:string;
+    responsavel:string;
+    documento:string;
+    telefone:string;
+    email:string;
+    enderecoId:number;
+    observacoes:string;
+  })=>void;
+
+  onAddAddress:(address:{
+    cep:string;
+    estadoId:string;
+    cidade:string;
+    bairro:string;
+    rua:string;
+    numero:string;
+    complemento:string;
+  })=>number;
 }
 
-export default function SuppliersModal({ open, onClose }: SuppliersModalProps) {
+export default function SuppliersModal({ open, onClose, onAddSupplier, onAddAddress }: SuppliersModalProps) {
   if (!open) return null;
 
   return (
@@ -54,7 +73,7 @@ export default function SuppliersModal({ open, onClose }: SuppliersModalProps) {
         </CardHeader>
 
         <CardContent>
-          <SuppliersForm onCancel={onClose} />
+          <SuppliersForm onCancel={onClose} onAddSupplier={onAddSupplier}  onAddAddress={onAddAddress}/>
         </CardContent>
       </Card>
     </div>

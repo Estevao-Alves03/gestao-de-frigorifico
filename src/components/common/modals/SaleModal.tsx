@@ -9,9 +9,20 @@ import {
 import SalesForm from "../../forms/Sale/SalesForm";
 import SaleSummary from "../../forms/Sale/SaleSummary";
 
+interface Sale {
+  id: number;
+  numeroVenda: string;
+  clienteId: number;
+  data: string;
+  quantidadeItens: number;
+  total: number;
+  pagamento: string;
+  status: string;
+}
 interface SaleModalProps {
   open: boolean;
   onClose: () => void;
+  onAddSale: (sale: Omit<Sale, "id">) => void;
 }
 
 export default function SaleModal({ open, onClose }: SaleModalProps) {

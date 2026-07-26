@@ -3,154 +3,273 @@ import { CardContent } from "../../ui/card";
 import { Switch } from "../../ui/switch";
 import { states } from "../../../data/states";
 import { Label } from "../../ui/label";
+import {
+  ClientSale,
+  AddressSale,
+} from "./SalesForm";
 
-export default function CustomerSaleForm() {
+interface CustomerSaleFormProps {
+  client: ClientSale;
+  setClient: React.Dispatch<React.SetStateAction<ClientSale>>;
+
+  address: AddressSale;
+  setAddress: React.Dispatch<React.SetStateAction<AddressSale>>;
+}
+
+export default function CustomerSaleForm({
+  client,
+  setClient,
+  address,
+  setAddress,
+}: CustomerSaleFormProps) {
   const [emitirNf, setEmitirNf] = useState(false);
 
   return (
     <div className="mt-6">
-      <h1 className="font-medium text-lg font-serif pb-4">SEÇÃO 2 - DADOS DO CLIENTE</h1>
-      <form className="space-y-4">
-        <section className="grid grid-cols-2 gap-2">
+      <h1 className="font-medium text-lg font-serif pb-4">
+        SEÇÃO 2 - DADOS DO CLIENTE
+      </h1>
+
+      <div className="space-y-4">
+        {/* Nome */}
+        <section>
           <div className="flex flex-col gap-1">
-            <Label htmlFor="">Nome <h1 className="text-red-600 font-bold text-lg">*</h1></Label>
+            <Label>Nome</Label>
             <input
               type="text"
               placeholder="Nome completo"
-              className="border rounded-md p-2 shadow-lg border-gray-300"
-            />
-          </div>
-          <div className="flex flex-col gap-1">
-            <Label htmlFor="">CPF <h1 className="text-red-600 font-bold text-lg">*</h1></Label>
-            <input
-              type="text"
-              placeholder="000.000.000-00"
+              value={client.nome}
+              onChange={(e) =>
+                setClient((prev) => ({
+                  ...prev,
+                  nome: e.target.value,
+                }))
+              }
               className="border rounded-md p-2 shadow-lg border-gray-300"
             />
           </div>
         </section>
+
+        <section className="grid grid-cols-2 gap-2">
+          <div className="flex flex-col gap-1">
+            <Label>CPF</Label>
+            <input
+              type="text"
+              placeholder="000.000.000-00"
+              value={client.documento}
+              onChange={(e) =>
+                setClient((prev) => ({
+                  ...prev,
+                  documento: e.target.value,
+                }))
+              }
+              className="border rounded-md p-2 shadow-lg border-gray-300"
+            />
+          </div>
+
+          <div className="flex flex-col gap-1">
+            <Label>Telefone</Label>
+            <input
+              type="text"
+              placeholder="(00) 00000-0000"
+              value={client.telefone}
+              onChange={(e) =>
+                setClient((prev) => ({
+                  ...prev,
+                  telefone: e.target.value,
+                }))
+              }
+              className="border rounded-md p-2 shadow-lg border-gray-300"
+            />
+          </div>
+        </section>
+
         <section className="flex items-center gap-2">
           <div className="border px-6 py-2 rounded-md flex items-center gap-2 hover:bg-gray-200/90 border-gray-300 shadow-xl">
             <Switch
               checked={emitirNf}
               onCheckedChange={setEmitirNf}
               className="cursor-pointer"
-            />{" "}
+            />
             Emitir Nota Fiscal
           </div>
         </section>
 
         {emitirNf && (
           <CardContent className="p-4 rounded-md pb-8 border-gray-300 shadow-xl border">
-            <form className="space-y-4">
+            <div className="space-y-4">
               <section className="grid grid-cols-2 gap-2">
                 <div className="flex flex-col gap-2">
-                  <Label htmlFor="">RG</Label>
+                  <Label>Documento RG</Label>
                   <input
                     type="text"
-                    placeholder="00.000.000-0"
+                    value={client.rg}
+                    onChange={(e) =>
+                      setClient((prev) => ({
+                        ...prev,
+                        rg: e.target.value,
+                      }))
+                    }
                     className="border rounded-md p-2 shadow-lg border-gray-300"
                   />
                 </div>
+
                 <div className="flex flex-col gap-2">
-                  <Label htmlFor="">Data de nascimento</Label>
+                  <Label>Data de nascimento</Label>
                   <input
                     type="date"
-                    placeholder=""
+                    value={client.dataNascimento}
+                    onChange={(e) =>
+                      setClient((prev) => ({
+                        ...prev,
+                        dataNascimento: e.target.value,
+                      }))
+                    }
                     className="border rounded-md p-2 shadow-lg border-gray-300"
                   />
                 </div>
               </section>
-              <section className="grid grid-cols-2 gap-2">
+
+              <section>
                 <div className="flex flex-col gap-2">
-                  <Label htmlFor="">Email</Label>
+                  <Label>Email</Label>
                   <input
                     type="email"
-                    placeholder="cliente@email.com"
-                    className="border rounded-md p-2 shadow-lg border-gray-300"
-                  />
-                </div>
-                <div className="flex flex-col gap-2">
-                  <Label htmlFor="">Telefone</Label>
-                  <input
-                    type="text"
-                    placeholder="(00) 00000-0000"
+                    value={client.email}
+                    onChange={(e) =>
+                      setClient((prev) => ({
+                        ...prev,
+                        email: e.target.value,
+                      }))
+                    }
                     className="border rounded-md p-2 shadow-lg border-gray-300"
                   />
                 </div>
               </section>
+
               <section className="grid grid-cols-2 gap-2">
                 <div className="flex flex-col gap-2">
-                  <Label htmlFor="">CEP</Label>
+                  <Label>CEP</Label>
                   <input
                     type="text"
-                    placeholder="00000-000"
+                    value={address.cep}
+                    onChange={(e) =>
+                      setAddress((prev) => ({
+                        ...prev,
+                        cep: e.target.value,
+                      }))
+                    }
                     className="border rounded-md p-2 shadow-lg border-gray-300"
                   />
                 </div>
+
                 <div className="flex flex-col gap-2">
-                  <Label htmlFor="">Estado</Label>
-                  <select className="rounded-md p-2 border shadow-lg border-gray-300">
+                  <Label>Estado</Label>
+                  <select
+                    value={address.estadoId}
+                    onChange={(e) =>
+                      setAddress((prev) => ({
+                        ...prev,
+                        estadoId: Number(e.target.value),
+                      }))
+                    }
+                    className="rounded-md p-2 border shadow-lg border-gray-300"
+                  >
                     <option value="">Selecione</option>
 
                     {states.map((state) => (
                       <option key={state.id} value={state.id}>
-                        {state.name}
+                        {state.nome}
                       </option>
                     ))}
                   </select>
                 </div>
               </section>
+
               <section className="grid grid-cols-2 gap-2">
                 <div className="flex flex-col gap-2">
-                  <Label htmlFor="">Cidade</Label>
+                  <Label>Cidade</Label>
                   <input
                     type="text"
-                    placeholder="Ex: São Paulo"
+                    value={address.cidade}
+                    onChange={(e) =>
+                      setAddress((prev) => ({
+                        ...prev,
+                        cidade: e.target.value,
+                      }))
+                    }
                     className="border rounded-md p-2 shadow-lg border-gray-300"
                   />
                 </div>
+
                 <div className="flex flex-col gap-2">
-                  <Label htmlFor="">Bairro</Label>
+                  <Label>Bairro</Label>
                   <input
                     type="text"
-                    placeholder="Ex: Centro"
+                    value={address.bairro}
+                    onChange={(e) =>
+                      setAddress((prev) => ({
+                        ...prev,
+                        bairro: e.target.value,
+                      }))
+                    }
                     className="border rounded-md p-2 shadow-lg border-gray-300"
                   />
                 </div>
               </section>
+
               <section className="grid grid-cols-2 gap-2">
                 <div className="flex flex-col gap-2">
-                  <Label htmlFor="">Rua</Label>
+                  <Label>Rua</Label>
                   <input
                     type="text"
-                    placeholder="Ex: Av. Paulista"
+                    value={address.complemento}
+                    onChange={(e) =>
+                      setAddress((prev) => ({
+                        ...prev,
+                        complemento: e.target.value,
+                      }))
+                    }
                     className="border rounded-md p-2 shadow-lg border-gray-300"
                   />
                 </div>
+
                 <div className="flex flex-col gap-2">
-                  <Label htmlFor="">Número</Label>
+                  <Label>Número</Label>
                   <input
                     type="text"
-                    placeholder="Ex: 1000"
+                    value={address.numero}
+                    onChange={(e) =>
+                      setAddress((prev) => ({
+                        ...prev,
+                        numero: e.target.value,
+                      }))
+                    }
                     className="border rounded-md p-2 shadow-lg border-gray-300"
                   />
                 </div>
               </section>
-              <section className="">
+
+              <section>
                 <div className="flex flex-col gap-2">
-                  <Label htmlFor="">Complento</Label>
+                  <Label>Complemento</Label>
                   <input
                     type="text"
-                    placeholder="Apto, bloco, etc."
+                    value={address.complemento}
+                    onChange={(e) =>
+                      setAddress((prev) => ({
+                        ...prev,
+                        complemento: e.target.value,
+                      }))
+                    }
                     className="border rounded-md p-2 shadow-lg border-gray-300"
                   />
                 </div>
               </section>
-            </form>
+            </div>
           </CardContent>
         )}
-      </form>
+      </div>
     </div>
   );
 }

@@ -3,21 +3,81 @@ import { categories } from "../../data/categories";
 import { cuts } from "../../data/cuts";
 import { suppliers } from "../../data/suppliers";
 import { Label } from "../ui/label";
+import React, { useState } from "react";
 
 interface ProductFormProps {
   onCancel: () => void;
+  onAddProduct: (product: {
+    nome:string,
+    lote:string,
+    categoriaId: number,
+    corteId: number,
+    fornecedorId: number,
+    dataEntrada: string,
+    dataValidade: string,
+    peso: number,
+    quantidade: number,
+    precoCompra: number,
+    precoVenda: number
+  }) => void;
 }
 
-export default function ProductForm({ onCancel }: ProductFormProps) {
+export default function ProductForm({ onCancel, onAddProduct }: ProductFormProps) {
+
+  const [form, setForm] = useState({
+    nome:"",
+    lote:"",
+    categoriaId: "",
+    corteId: "",
+    fornecedorId: "",
+    dataEntrada: "",
+    dataValidade: "",
+    peso: "",
+    quantidade: "",
+    precoCompra: "",
+    precoVenda: ""
+  })
+
+  const handleChange = (field: keyof typeof form, value: string) => {
+    setForm((prev) => ({
+      ...prev,
+      [field]: value
+    }))
+  }
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+
+    console.log("submit")
+
+    onAddProduct({
+      nome: form.nome,
+      lote: form.lote,
+      categoriaId: Number(form.categoriaId),
+      corteId: Number(form.corteId),
+      fornecedorId: Number(form.fornecedorId),
+      dataEntrada: form.dataEntrada,
+      dataValidade: form.dataValidade,
+      peso: Number(form.peso),
+      quantidade: Number(form.quantidade),
+      precoCompra: Number(form.precoCompra),
+      precoVenda: Number(form.precoVenda)
+    })
+
+    onCancel()
+  }
+
+
   return (
-    <form className="space-y-4">
+    <form className="space-y-4" onSubmit={handleSubmit}>
       {/* Nome */}
       <div className="flex flex-col gap-2">
         <Label>Nome</Label>
 
         <input
-          name="name"
           type="text"
+          value={form.nome}
+          onChange={(e) => handleChange("nome", e.target.value)}
           placeholder="Ex: Contra-Filé"
           className="border rounded-md p-2.5 border-gray-300 shadow-lg"
         />
@@ -28,7 +88,11 @@ export default function ProductForm({ onCancel }: ProductFormProps) {
         <div className="flex flex-col gap-2">
           <Label>Categoria</Label>
 
-          <select name="category" className="border rounded-md p-2.5 border-gray-300 shadow-lg">
+          <select 
+          value={form.categoriaId}
+          onChange={(e) => handleChange('categoriaId', e.target.value)}
+          name="category" 
+          className="border rounded-md p-2.5 border-gray-300 shadow-lg">
             <option value="">Selecione</option>
 
             {categories.map((category) => (
@@ -42,7 +106,11 @@ export default function ProductForm({ onCancel }: ProductFormProps) {
         <div className="flex flex-col gap-2">
           <Label>Corte</Label>
 
-          <select name="cut" className="border rounded-md p-2.5 border-gray-300 shadow-lg">
+          <select 
+          value={form.corteId}
+          onChange={(e) => handleChange("corteId", e.target.value)}
+          name="cut" 
+          className="border rounded-md p-2.5 border-gray-300 shadow-lg">
             <option value="">Selecione</option>
 
             {cuts.map((cut) => (
@@ -59,12 +127,16 @@ export default function ProductForm({ onCancel }: ProductFormProps) {
         <div className="flex flex-col gap-2">
           <Label>Fornecedor</Label>
 
-          <select name="supplier" className="border rounded-md p-2.5 border-gray-300 shadow-lg">
+          <select 
+          value={form.fornecedorId}
+          onChange={(e) => handleChange("fornecedorId", e.target.value)}
+          name="supplier" 
+          className="border rounded-md p-2.5 border-gray-300 shadow-lg">
             <option value="">Selecione</option>
 
             {suppliers.map((supplier) => (
               <option key={supplier.id} value={supplier.id}>
-                {supplier.company}
+                {supplier.empresa}
               </option>
             ))}
           </select>
@@ -76,6 +148,8 @@ export default function ProductForm({ onCancel }: ProductFormProps) {
           <input
             name="batch"
             type="text"
+            value={form.lote}
+            onChange={(e) => handleChange("lote", e.target.value)}
             placeholder="Lote - 20260723-01"
             className="border rounded-md p-2.5 border-gray-300 shadow-lg"
           />
@@ -90,6 +164,8 @@ export default function ProductForm({ onCancel }: ProductFormProps) {
           <input
             name="entry_date"
             type="date"
+            value={form.dataEntrada}
+            onChange={(e) => handleChange("dataEntrada", e.target.value)}
             className="border rounded-md p-2.5 border-gray-300 shadow-lg"
           />
         </div>
@@ -100,6 +176,8 @@ export default function ProductForm({ onCancel }: ProductFormProps) {
           <input
             name="expiration_date"
             type="date"
+            value={form.dataValidade}
+            onChange={(e) => handleChange("dataValidade", e.target.value)}
             className="border rounded-md p-2.5 border-gray-300 shadow-lg"
           />
         </div>
@@ -113,6 +191,8 @@ export default function ProductForm({ onCancel }: ProductFormProps) {
           <input
             name="weight"
             type="number"
+            value={form.peso}
+            onChange={(e) => handleChange("peso", e.target.value)}
             placeholder="0"
             className="border rounded-md p-2.5 border-gray-300 shadow-lg"
           />
@@ -124,6 +204,8 @@ export default function ProductForm({ onCancel }: ProductFormProps) {
           <input
             name="quantity"
             type="number"
+            value={form.quantidade}
+            onChange={(e) => handleChange("quantidade", e.target.value)}
             placeholder="0"
             className="border rounded-md p-2.5 border-gray-300 shadow-lg"
           />
@@ -139,6 +221,8 @@ export default function ProductForm({ onCancel }: ProductFormProps) {
             name="purchase_price"
             type="number"
             step="0.01"
+            value={form.precoCompra}
+            onChange={(e) => handleChange("precoCompra", e.target.value)}
             placeholder="R$ 0,00"
             className="border rounded-md p-2.5 border-gray-300 shadow-lg"
           />
@@ -151,6 +235,8 @@ export default function ProductForm({ onCancel }: ProductFormProps) {
             name="sale_price"
             type="number"
             step="0.01"
+            value={form.precoVenda}
+            onChange={(e) => handleChange("precoVenda", e.target.value)}
             placeholder="R$ 0,00"
             className="border rounded-md p-2.5 border-gray-300 shadow-lg"
           />

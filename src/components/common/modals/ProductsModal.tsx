@@ -4,11 +4,23 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "../..
 
 interface ProductModalProps {
   open: boolean;
-
   onClose: () => void;
+  onAddProduct: (product: {
+    nome:string,
+    lote:string,
+    categoriaId: number,
+    corteId: number,
+    fornecedorId: number,
+    dataEntrada: string,
+    dataValidade: string,
+    peso: number,
+    quantidade: number,
+    precoCompra: number,
+    precoVenda: number
+  }) => void;
 }
 
-export default function ProductModal({ open, onClose }: ProductModalProps) {
+export default function ProductModal({ open, onClose, onAddProduct }: ProductModalProps) {
   if (!open) return null;
 
   return (
@@ -48,7 +60,7 @@ export default function ProductModal({ open, onClose }: ProductModalProps) {
         </CardHeader>
 
         <CardContent>
-          <ProductForm onCancel={onClose} />
+          <ProductForm onCancel={onClose} onAddProduct={onAddProduct} />
         </CardContent>
       </Card>
     </div>

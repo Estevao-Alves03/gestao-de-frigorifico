@@ -1,0 +1,42 @@
+export const addresses = [
+  {
+    id: 1,
+    cep: "74000-000",
+    estadoId: "GO",
+    cidade: "Goiânia",
+    bairro: "Centro",
+    rua: "Rua A",
+    numero: "123",
+    complemento: "Casa"
+  },
+   {
+    id: 2,
+    cep: "74000-000",
+    estadoId: "GO",
+    cidade: "Goiânia",
+    bairro: "Setor Norte",
+    rua: "Av. Industrial",
+    numero: "1250",
+    complemento: "",
+  },
+  {
+    id: 3,
+    cep: "74900-000",
+    estadoId: "GO",
+    cidade: "Aparecida de Goiânia",
+    bairro: "Polo Empresarial",
+    rua: "Rua das Indústrias",
+    numero: "450",
+    complemento: "",
+  },
+  {
+    id: 4,
+    cep: "75900-000",
+    estadoId: "GO",
+    cidade: "Rio Verde",
+    bairro: "Centro",
+    rua: "Av. Presidente Vargas",
+    numero: "890",
+    complemento: "",
+  },
+];

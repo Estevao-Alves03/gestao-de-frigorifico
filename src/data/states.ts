@@ -1,26 +1,26 @@
 export const states = [
     {
         id: 1,
-        name: 'GO'
+        nome: 'GO'
     },
     {
         id: 2,
-        name: 'RJ'
+        nome: 'RJ'
     },
     {
         id: 3,
-        name: 'MG'
+        nome: 'MG'
     },
     {
         id: 3,
-        name: 'SP'
+        nome: 'SP'
     },
     {
         id: 4,
-        name: 'DF'
+        nome: 'DF'
     },
     {
         id: 5,
-        name: 'TO'
+        nome: 'TO'
     },
 ]
