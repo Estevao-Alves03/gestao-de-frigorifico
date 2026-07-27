@@ -18,6 +18,8 @@ interface Sale {
   total: number;
   pagamento: string;
   status: string;
+  desconto: number;
+  valorFinal: number
 }
 interface SaleModalProps {
   open: boolean;
@@ -25,7 +27,7 @@ interface SaleModalProps {
   onAddSale: (sale: Omit<Sale, "id">) => void;
 }
 
-export default function SaleModal({ open, onClose }: SaleModalProps) {
+export default function SaleModal({ open, onClose, onAddSale }: SaleModalProps) {
   if (!open) return null;
 
   return (
@@ -72,7 +74,7 @@ export default function SaleModal({ open, onClose }: SaleModalProps) {
           <div className="grid grid-cols-[2fr_1fr] h-full">
             {/* esquerda */}
             <div className="overflow-y-auto pr-6">
-              <SalesForm onCancel={onClose} />
+              <SalesForm onCancel={onClose} onAddSale={onAddSale} />
             </div>
             {/* direita */}
             <div className="border-l px-7">

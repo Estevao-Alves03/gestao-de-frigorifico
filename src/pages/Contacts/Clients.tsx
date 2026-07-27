@@ -7,6 +7,7 @@ import TableActions from "../../components/common/TableActions";
 import TableCard from "../../components/common/TableCard";
 import TableEmpty from "../../components/common/TableEmpty";
 import { addresses } from "../../data/addresses";
+import ClientDetail from "../../components/common/details/ClientDetail";
 
 export default function Clients() {
   const grid = "grid grid-cols-[2fr_1fr_2fr_2fr_1.5fr_1fr]";
@@ -14,6 +15,15 @@ export default function Clients() {
   const [search, setSearch] = useState("");
   const [clientsList, setClientsList] = useState(clients);
   const [addressesList, setAddressesList] = useState(addresses);
+  const [selectedClientId, setSelectedClientId] = useState<number | null>(null)
+
+  const selectedClient = clientsList.find(
+    (client) => client.id === selectedClientId
+  )
+
+  const selectedAddress = addressesList.find(
+    (address) => address.id === selectedClient?.enderecoId
+  )
 
   const clientesFiltrados = clientsList.filter((client) => {
     const busca = search.toLowerCase();
@@ -96,7 +106,8 @@ export default function Clients() {
               return (
                 <div
                   key={client.id}
-                  className={`${grid} items-center py-3 px-6 border-b border-gray-300 last:border-b-0 hover:bg-gray-100`}
+                  onClick={() => setSelectedClientId(client.id)}
+                  className={`${grid} items-center py-3 px-6 border-b border-gray-300 last:border-b-0 hover:bg-gray-100 cursor-pointer`}
                 >
                   <p>{client.nome}</p>
                   <p>{client.tipo}</p>
@@ -119,6 +130,13 @@ export default function Clients() {
         onAddClient={addClient}
         onAddAddress={addAddress}
       ></ClientsModal>
+
+      <ClientDetail
+      client={selectedClient}
+      address={selectedAddress}
+      onClose={() => setSelectedClientId(null)}
+      >
+      </ClientDetail>
     </div>
   );
 }

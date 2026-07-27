@@ -27,8 +27,8 @@ export default function Header() {
         bg-background
       "
     >
-      <section className="flex items-center gap-3">
-        <SidebarTrigger />
+      <section className="flex items-center gap-3 ">
+        <SidebarTrigger className="cursor-pointer"/>
 
         <h1 className="font-serif text-md">Inicio / {currentPage}</h1>
       </section>

@@ -7,10 +7,12 @@ import {
   CardDescription,
   CardContent,
 } from "../../ui/card";
+import { Client } from "../../../types/Client";
 
 interface ClientsModalProps {
   open: boolean;
   onClose: () => void;
+
 
   onAddAddress: (address: {
     cep: string;
@@ -22,22 +24,14 @@ interface ClientsModalProps {
     complemento: string;
   }) => number;
 
-  onAddClient: (client: {
-    name: string;
-    tipo: string;
-    documento: string;
-    dataNascimento: string;
-    email: string;
-    telefone: string;
-    enderecoId: number;
-  }) => void;
+  onAddClient: (client: Omit<Client, "id">) => void;
 }
 
 export default function ClientsModal({
   open,
   onClose,
   onAddClient,
-  onAddAddress
+  onAddAddress,
 }: ClientsModalProps) {
   if (!open) return null;
 
@@ -49,6 +43,7 @@ export default function ClientsModal({
             <CardTitle className="font-bold text-xl font-serif">
               Novo Cliente
             </CardTitle>
+
             <button
               onClick={onClose}
               className="p-1 rounded-md hover:bg-gray-100"
@@ -56,12 +51,18 @@ export default function ClientsModal({
               <IoMdClose size={20} />
             </button>
           </div>
+
           <CardDescription className="text-lg font-serif">
-            Preencha os dados do cliente{" "}
+            Preencha os dados do cliente
           </CardDescription>
         </CardHeader>
+
         <CardContent>
-          <ClientsForm onCancel={onClose} onAddClient={onAddClient} onAddAddress={onAddAddress} />
+          <ClientsForm
+            onCancel={onClose}
+            onAddClient={onAddClient}
+            onAddAddress={onAddAddress}
+          />
         </CardContent>
       </Card>
     </div>

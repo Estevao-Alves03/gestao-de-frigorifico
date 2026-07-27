@@ -25,7 +25,7 @@ export default function PageHeader({
         {buttonText && onButtonClick && (
           <Button
             onClick={onButtonClick}
-            className="text-lg font-serif items-center flex h-10 w-full py-5 px-6 font-bold"
+            className="text-lg font-serif items-center flex h-10 w-full py-5 px-6 font-bold cursor-pointer"
           >
             <GoPlus />
             {buttonText}

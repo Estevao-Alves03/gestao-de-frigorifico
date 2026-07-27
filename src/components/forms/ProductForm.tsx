@@ -8,7 +8,7 @@ import React, { useState } from "react";
 interface ProductFormProps {
   onCancel: () => void;
   onAddProduct: (product: {
-    nome:string,
+    nomeProduto:string,
     lote:string,
     categoriaId: number,
     corteId: number,
@@ -25,7 +25,7 @@ interface ProductFormProps {
 export default function ProductForm({ onCancel, onAddProduct }: ProductFormProps) {
 
   const [form, setForm] = useState({
-    nome:"",
+    nomeProduto:"",
     lote:"",
     categoriaId: "",
     corteId: "",
@@ -51,7 +51,7 @@ export default function ProductForm({ onCancel, onAddProduct }: ProductFormProps
     console.log("submit")
 
     onAddProduct({
-      nome: form.nome,
+      nomeProduto: form.nomeProduto,
       lote: form.lote,
       categoriaId: Number(form.categoriaId),
       corteId: Number(form.corteId),
@@ -76,8 +76,8 @@ export default function ProductForm({ onCancel, onAddProduct }: ProductFormProps
 
         <input
           type="text"
-          value={form.nome}
-          onChange={(e) => handleChange("nome", e.target.value)}
+          value={form.nomeProduto}
+          onChange={(e) => handleChange("nomeProduto", e.target.value)}
           placeholder="Ex: Contra-Filé"
           className="border rounded-md p-2.5 border-gray-300 shadow-lg"
         />

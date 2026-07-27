@@ -62,6 +62,7 @@ export function AppSidebar() {
                     hover:bg-primary/10
                     hover:text-primary
                     gap-4
+                    cursor-pointer
                   "
                 >
                   <MdOutlineDashboard />
@@ -82,6 +83,7 @@ export function AppSidebar() {
                     hover:bg-primary/10
                     hover:text-primary
                     gap-4
+                    cursor-pointer
                   "
                 >
                   <BsFillBoxFill />
@@ -102,6 +104,7 @@ export function AppSidebar() {
                     hover:bg-primary/10
                     hover:text-primary
                     gap-4
+                    cursor-pointer
                   "
                 >
                   <LuHandshake />
@@ -122,6 +125,7 @@ export function AppSidebar() {
                     hover:bg-primary/10
                     hover:text-primary
                     gap-4
+                    cursor-pointer
                   "
                 >
                   <FaUserPlus />
@@ -142,6 +146,7 @@ export function AppSidebar() {
                     hover:bg-primary/10
                     hover:text-primary
                     gap-4
+                    cursor-pointer
                   "
                 >
                   <MdOutlineShoppingCart />
@@ -168,6 +173,7 @@ export function AppSidebar() {
                         hover:text-primary
                         gap-4
                         group
+                        cursor-pointer
                       "
                     >
                       <GoGear />
@@ -204,6 +210,7 @@ export function AppSidebar() {
                           text-muted-foreground
                           hover:bg-primary/10
                           hover:text-primary
+                          cursor-pointer
                         "
                       >
                         Categorias
@@ -220,6 +227,7 @@ export function AppSidebar() {
                           text-muted-foreground
                           hover:bg-primary/10
                           hover:text-primary
+                          cursor-pointer
                         "
                       >
                         Cortes
@@ -245,6 +253,7 @@ export function AppSidebar() {
                 font-medium
                 hover:bg-primary/10
                 hover:text-primary
+                cursor-pointer
               "
             >
               <GoGear />
@@ -261,6 +270,7 @@ export function AppSidebar() {
                 font-medium
                 hover:bg-primary/10
                 hover:text-primary
+                cursor-pointer
               "
             >
               <MdLogout />

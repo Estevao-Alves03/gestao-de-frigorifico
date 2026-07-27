@@ -11,6 +11,7 @@ import { MdOutlineHive } from "react-icons/md";
 import PageHeader from "../../components/layout/PageHeader";
 
 export default function Dashboard() {
+
   return (
     <div className="p-7 pt-8">
       <PageHeader title="Dashboard" description="Visão geral do seu estoque" />

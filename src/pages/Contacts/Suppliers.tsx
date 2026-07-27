@@ -7,6 +7,7 @@ import TableActions from "../../components/common/TableActions";
 import TableCard from "../../components/common/TableCard";
 import TableEmpty from "../../components/common/TableEmpty";
 import { addresses } from "../../data/addresses";
+import SupplierDetail from "../../components/common/details/SupplierDetail";
 
 export default function Suppliers() {
   const grid = "grid grid-cols-[3.8fr_2fr_2fr_2fr_1fr_1fr]";
@@ -14,7 +15,16 @@ export default function Suppliers() {
   const [openModalSuppliers, setOpenModalSuppliers] = useState(false);
   const [search, setSearch] = useState("");
   const [suppliersList, setSuppliersList] = useState(suppliers);
-  const [addressesList, setAddressesList] = useState(addresses)
+  const [addressesList, setAddressesList] = useState(addresses);
+  const [selectSupplierId, setSelectSupplierId] = useState<number | null>(null);
+
+  const selectedSupplier = suppliersList.find(
+    (supplier) => supplier.id === selectSupplierId,
+  );
+
+  const selectedAddress = addressesList.find(
+    (address) => address.id === selectedSupplier?.enderecoId
+  )
 
   const fornecedoresFiltrados = suppliersList.filter((supplier) => {
     const busca = search.toLowerCase();
@@ -40,18 +50,18 @@ export default function Suppliers() {
   };
 
   const addAddress = (newAddress: Omit<(typeof addresses)[number], "id">) => {
-  const newId = addressesList.length + 1;
+    const newId = addressesList.length + 1;
 
-  setAddressesList((prev) => [
-    ...prev,
-    {
-      id: newId,
-      ...newAddress,
-    },
-  ]);
+    setAddressesList((prev) => [
+      ...prev,
+      {
+        id: newId,
+        ...newAddress,
+      },
+    ]);
 
-  return newId;
-};
+    return newId;
+  };
 
   const removeSuppliers = (id: number) => {
     setSuppliersList((prev) => prev.filter((supplier) => supplier.id !== id));
@@ -101,7 +111,8 @@ export default function Suppliers() {
               return (
                 <div
                   key={supplier.id}
-                  className={`${grid} items-center border-b border-gray-300 hover:bg-gray-100 px-6 py-3 last:border-b-0`}
+                  onClick={() => setSelectSupplierId(supplier.id)}
+                  className={`${grid} items-center border-b border-gray-300 hover:bg-gray-100 px-6 py-3 last:border-b-0 cursor-pointer`}
                 >
                   <p className="font-medium">{supplier.empresa}</p>
 
@@ -136,7 +147,13 @@ export default function Suppliers() {
         onClose={() => setOpenModalSuppliers(false)}
         onAddSupplier={AddSupplier}
         onAddAddress={addAddress}
-      ></SuppliersModal>
+      />
+
+      <SupplierDetail
+        supplier={selectedSupplier}
+        address={selectedAddress}
+        onClose={() => setSelectSupplierId(null)}
+      />
     </div>
   );
 }

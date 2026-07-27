@@ -18,9 +18,10 @@ interface ClientsFormProps {
   }) => number;
 
   onAddClient: (client: {
-    name: string;
+    nome: string;
     tipo: string;
     documento: string;
+    rg: string;
     dataNascimento: string;
     email: string;
     telefone: string;
@@ -36,11 +37,12 @@ export default function ClientsForm({
   const [personaType, setPersonaType] = useState<"pf" | "pj">("pf");
 
   const [form, setForm] = useState({
-    name: "",
+    nome: "",
     documento: "",
     dataNascimento: "",
     email: "",
     telefone: "",
+    rg: "",
 
     cep: "",
     estadoId: "",
@@ -76,7 +78,8 @@ export default function ClientsForm({
 
     // cria cliente com referência do endereço
     onAddClient({
-      name: form.name,
+      nome: form.nome,
+      rg: form.rg,
       tipo: personaType.toUpperCase(),
       documento: form.documento,
       dataNascimento: form.dataNascimento,
@@ -118,8 +121,8 @@ export default function ClientsForm({
 
           <input
             type="text"
-            value={form.name}
-            onChange={(e) => handleChange("name", e.target.value)}
+            value={form.nome}
+            onChange={(e) => handleChange("nome", e.target.value)}
             placeholder="Ex: Lucas Carvalho"
             className="border rounded-md p-2.5 border-gray-300 shadow-lg"
           />
@@ -196,18 +199,19 @@ export default function ClientsForm({
         <div className="flex flex-col gap-2">
           <Label>Estado</Label>
 
-         <select 
-         value={form.estadoId}
-         onChange={(e) => handleChange("estadoId", e.target.value)}
-         className="border border-gray-300 shadow-lg p-2.5 rounded-md">
-          <option value="">Selecione</option>
+          <select
+            value={form.estadoId}
+            onChange={(e) => handleChange("estadoId", e.target.value)}
+            className="border border-gray-300 shadow-lg p-2.5 rounded-md"
+          >
+            <option value="">Selecione</option>
 
-          {states.map((state) => (
-            <option value={state.id} key={state.id}>
-              {state.nome}
-            </option>
-          ))}
-         </select>
+            {states.map((state) => (
+              <option value={state.id} key={state.id}>
+                {state.nome}
+              </option>
+            ))}
+          </select>
         </div>
       </section>
 

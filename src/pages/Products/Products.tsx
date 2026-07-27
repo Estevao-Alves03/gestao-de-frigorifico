@@ -7,11 +7,17 @@ import TableActions from "../../components/common/TableActions";
 import TableCard from "../../components/common/TableCard";
 import TableEmpty from "../../components/common/TableEmpty";
 import { Button } from "../../components/ui/button";
+import ProductDetail from "../../components/common/details/ProductDetail";
 
 export default function Product() {
   const gridColumns = "grid grid-cols-[1.3fr_1fr_1fr_1fr_1fr_1fr_1fr]";
   const [openModalProducts, setOpenModalProducts] = useState(false);
   const [productList, setProductList] = useState(products)
+  const [selectProductId, setSelectProductId] = useState<number | null>(null)
+
+  const selectedProduct = productList.find(
+    (product) => product.id === selectProductId
+  )
 
   const produtosEmEstoque = productList.filter(
     (product) => product.quantidade > 0,
@@ -74,7 +80,8 @@ export default function Product() {
             {produtosEmEstoque.map((product) => (
               <div
                 key={product.id}
-                className={`${gridColumns} items-center px-6 py-3 border-b border-gray-300 hover:bg-gray-100 last:border-b-0`}
+                onClick={() => setSelectProductId(product.id)}
+                className={`${gridColumns} items-center px-6 py-3 border-b border-gray-300 hover:bg-gray-100 last:border-b-0 cursor-pointer`}
               >
                 <p className="font-medium">{product.nomeProduto}</p>
                 <p className="font-medium">{product.peso} Kg</p>
@@ -140,6 +147,11 @@ export default function Product() {
         open={openModalProducts}
         onClose={() => setOpenModalProducts(false)}
         onAddProduct={addProduct}
+      />
+
+      <ProductDetail
+      product={selectedProduct}
+      onClose={() => setSelectProductId(null)}
       />
     </div>
   );

@@ -6,7 +6,7 @@ interface ProductModalProps {
   open: boolean;
   onClose: () => void;
   onAddProduct: (product: {
-    nome:string,
+    nomeProduto:string,
     lote:string,
     categoriaId: number,
     corteId: number,

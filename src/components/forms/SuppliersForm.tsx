@@ -1,6 +1,7 @@
 import { Button } from "../ui/button";
 import { states } from "../../data/states";
 import React, { useState } from "react";
+import { Label } from "../ui/label";
 
 interface SuppliersFormProps {
   onCancel: () => void;
@@ -87,7 +88,7 @@ export default function SuppliersForm({
       {/* Empresa e responsável */}
       <section className="grid grid-cols-2 gap-2">
         <div className="flex flex-col gap-2">
-          <label>Nome da empresa</label>
+          <Label>Nome da empresa</Label>
 
           <input
             type="text"
@@ -99,7 +100,7 @@ export default function SuppliersForm({
         </div>
 
         <div className="flex flex-col gap-2">
-          <label>Responsável</label>
+          <Label>Responsável</Label>
 
           <input
             type="text"
@@ -114,7 +115,7 @@ export default function SuppliersForm({
       {/* Documento e telefone */}
       <section className="grid grid-cols-2 gap-2">
         <div className="flex flex-col gap-2">
-          <label>CNPJ</label>
+          <Label>CNPJ</Label>
 
           <input
             type="text"
@@ -126,7 +127,7 @@ export default function SuppliersForm({
         </div>
 
         <div className="flex flex-col gap-2">
-          <label>Telefone</label>
+          <Label>Telefone</Label>
 
           <input
             type="text"
@@ -140,7 +141,7 @@ export default function SuppliersForm({
 
       {/* Email */}
       <div className="flex flex-col gap-2">
-        <label>Email</label>
+        <Label>Email</Label>
 
         <input
           type="email"
@@ -154,7 +155,7 @@ export default function SuppliersForm({
       {/* Endereço */}
       <section className="grid grid-cols-2 gap-2">
         <div className="flex flex-col gap-2">
-          <label>CEP</label>
+          <Label>CEP</Label>
 
           <input
             type="text"
@@ -166,18 +167,18 @@ export default function SuppliersForm({
         </div>
 
         <div className="flex flex-col gap-2">
-          <label>estado</label>
+          <Label>Estado</Label>
 
           <select
             value={form.estadoId}
             onChange={(e) => handleChange("estadoId", e.target.value)}
-            className="border rounded-md p-2.5 border-gray-300 shadow-lg"
+            className="border rounded-md p-2.5 border-gray-300 shadow-lg text-muted-foreground"
           >
             <option value="">Selecione</option>
 
             {states.map((state) => (
-              <option key={state.id} value={state.name}>
-                {state.name}
+              <option key={state.id} value={state.nome}>
+                {state.nome}
               </option>
             ))}
           </select>
@@ -186,7 +187,7 @@ export default function SuppliersForm({
 
       <section className="grid grid-cols-2 gap-2">
         <div className="flex flex-col gap-2">
-          <label>Cidade</label>
+          <Label>Cidade</Label>
 
           <input
             type="text"
@@ -198,7 +199,7 @@ export default function SuppliersForm({
         </div>
 
         <div className="flex flex-col gap-2">
-          <label>Bairro</label>
+          <Label>Bairro</Label>
 
           <input
             type="text"
@@ -212,7 +213,7 @@ export default function SuppliersForm({
 
       <section className="grid grid-cols-3 gap-2">
         <div className="flex flex-col gap-2">
-          <label>Rua</label>
+          <Label>Rua</Label>
 
           <input
             type="text"
@@ -224,7 +225,7 @@ export default function SuppliersForm({
         </div>
 
         <div className="flex flex-col gap-2">
-          <label>Número</label>
+          <Label>Número</Label>
 
           <input
             type="text"
@@ -236,7 +237,7 @@ export default function SuppliersForm({
         </div>
 
         <div className="flex flex-col gap-2">
-          <label>Complemento</label>
+          <Label>Complemento</Label>
 
           <input
             type="text"
@@ -250,7 +251,7 @@ export default function SuppliersForm({
 
       {/* Observações */}
       <div className="flex flex-col gap-2">
-        <label>Observações</label>
+        <Label>Observações</Label>
 
         <textarea
           value={form.observacoes}

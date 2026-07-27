@@ -5,6 +5,17 @@ import ProductSaleForm from "./ProductSaleForm";
 
 interface SalesFormProps {
   onCancel: () => void;
+  onAddSale: (sale: {
+    numeroVenda: string;
+    clienteId: number;
+    data: string;
+    quantidadeItens: number;
+    total: number;
+    pagamento: string;
+    status: string;
+    desconto: number;
+    valorFinal: number;
+  }) => void;
 }
 
 export interface ProductSale {
@@ -34,7 +45,7 @@ export interface AddressSale {
   complemento: string;
 }
 
-export default function SalesForm({ onCancel }: SalesFormProps) {
+export default function SalesForm({ onCancel, onAddSale }: SalesFormProps) {
   const [products, setProducts] = useState<ProductSale[]>([
     {
       id: Date.now(),
@@ -65,32 +76,43 @@ export default function SalesForm({ onCancel }: SalesFormProps) {
   });
 
   function handleFinishSale() {
-    const sale = {
-      cliente: client,
-      endereco: address,
-      produtos: products.map((item) => ({
-        produtoId: Number(item.produtoId),
-        quantidade: Number(item.quantidade),
-        precoVenda: Number(item.precoVenda),
-        desconto: Number(item.desconto),
-        total:
-          Number(item.quantidade || 0) *
-            Number(item.precoVenda || 0) -
-          Number(item.desconto || 0),
-      })),
+    const produtosVenda = products.map((item) => ({
+      produtoId: Number(item.produtoId),
+      quantidade: Number(item.quantidade),
+      precoVenda: Number(item.precoVenda),
+      desconto: Number(item.desconto),
+      total:
+        Number(item.quantidade) * Number(item.precoVenda) -
+        Number(item.desconto),
+    }));
+
+    const total = produtosVenda.reduce((acc, item) => acc + item.total, 0);
+
+    const desconto = produtosVenda.reduce(
+      (acc, item) => acc + item.desconto,
+      0,
+    );
+
+    const novaVenda = {
+      numeroVenda: `V-${Date.now()}`,
+      clienteId: 1,
+      data: new Date().toLocaleDateString("pt-BR"),
+      quantidadeItens: produtosVenda.length,
+      total,
+      desconto,
+      valorFinal: total - desconto,
+      pagamento: "Dinheiro",
+      status: "Pendente",
     };
 
-    console.log(sale);
+    onAddSale(novaVenda);
 
-    onCancel()
+    onCancel();
   }
 
   return (
     <div>
-      <ProductSaleForm
-        products={products}
-        setProducts={setProducts}
-      />
+      <ProductSaleForm products={products} setProducts={setProducts} />
 
       <CustomerSaleForm
         client={client}
