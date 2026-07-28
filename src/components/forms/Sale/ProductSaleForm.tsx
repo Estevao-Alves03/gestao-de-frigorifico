@@ -71,7 +71,7 @@ export default function ProductSaleForm({
                 onChange={(e) =>
                   handleChange(item.id, "produtoId", e.target.value)
                 }
-                className="border rounded-md p-2.5 border-gray-300 shadow-lg"
+                className="border rounded-md p-1.5 border-gray-300 shadow-lg text-xs"
               >
                 <option value="">Selecione</option>
 
@@ -89,7 +89,7 @@ export default function ProductSaleForm({
                 onChange={(e) =>
                   handleChange(item.id, "quantidade", e.target.value)
                 }
-                className="border rounded-md p-2 w-full border-gray-300 shadow-lg"
+                className="border rounded-md p-1.5 placeholder:text-xs w-full border-gray-300 shadow-lg"
               />
 
               <input
@@ -99,7 +99,7 @@ export default function ProductSaleForm({
                 onChange={(e) =>
                   handleChange(item.id, "precoVenda", e.target.value)
                 }
-                className="border rounded-md p-2 w-full border-gray-300 shadow-lg"
+                className="border rounded-md p-1.5 placeholder:text-xs w-full border-gray-300 shadow-lg"
               />
 
               <input
@@ -109,7 +109,7 @@ export default function ProductSaleForm({
                 onChange={(e) =>
                   handleChange(item.id, "desconto", e.target.value)
                 }
-                className="border rounded-md p-2 w-full border-gray-300 shadow-lg"
+                className="border rounded-md p-1.5 placeholder:text-xs w-full border-gray-300 shadow-lg"
               />
 
               <input
@@ -120,13 +120,13 @@ export default function ProductSaleForm({
                     Number(item.precoVenda || 0) -
                   Number(item.desconto || 0)
                 ).toFixed(2)}
-                className="border rounded-md p-2 w-full border-gray-300 shadow-lg bg-gray-100"
+                className="border rounded-md p-1.5 placeholder:text-xs w-full border-gray-300 shadow-lg bg-gray-100"
               />
 
               <button
                 type="button"
                 onClick={() => removeProduct(item.id)}
-                className="py-2.5 shadow-lg rounded-md flex items-center justify-center group bg-transparent border border-gray-300 transition-all duration-300 ease-in-out hover:bg-red-500 hover:border-none cursor-pointer"
+                className="py-2 shadow-lg rounded-md flex items-center justify-center group bg-transparent border border-gray-300 transition-all duration-300 ease-in-out hover:bg-red-500 hover:border-none cursor-pointer"
               >
                 <IoTrashOutline className="text-red-600 group-hover:text-white duration-300 ease-in-out" />
               </button>

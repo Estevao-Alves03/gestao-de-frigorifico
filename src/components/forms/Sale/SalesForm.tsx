@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Button } from "../../ui/button";
 import CustomerSaleForm from "./CustomerSaleForm";
 import ProductSaleForm from "./ProductSaleForm";
+import PaymentSaleForm from "./PaymentSaleForm";
 
 interface SalesFormProps {
   onCancel: () => void;
@@ -110,6 +111,13 @@ export default function SalesForm({ onCancel, onAddSale }: SalesFormProps) {
     onCancel();
   }
 
+  const valorVenda = products.reduce((acc, item) => {
+    const subtotal = 
+      Number(item.quantidade) * Number(item.precoVenda);
+
+      return acc + subtotal - Number(item.desconto)
+  }, 0)
+
   return (
     <div>
       <ProductSaleForm products={products} setProducts={setProducts} />
@@ -120,6 +128,8 @@ export default function SalesForm({ onCancel, onAddSale }: SalesFormProps) {
         address={address}
         setAddress={setAddress}
       />
+
+      <PaymentSaleForm valorVenda={valorVenda}/>
 
       <section className="flex justify-end gap-2 mt-3 pt-5 border-t">
         <Button

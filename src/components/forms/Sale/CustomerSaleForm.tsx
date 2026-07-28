@@ -3,10 +3,7 @@ import { CardContent } from "../../ui/card";
 import { Switch } from "../../ui/switch";
 import { states } from "../../../data/states";
 import { Label } from "../../ui/label";
-import {
-  ClientSale,
-  AddressSale,
-} from "./SalesForm";
+import { ClientSale, AddressSale } from "./SalesForm";
 
 interface CustomerSaleFormProps {
   client: ClientSale;
@@ -34,7 +31,9 @@ export default function CustomerSaleForm({
         {/* Nome */}
         <section>
           <div className="flex flex-col gap-1">
-            <Label>Nome</Label>
+            <Label className="text-xs">
+              Nome <p className="text-red-500 font-bold">*</p>
+            </Label>
             <input
               type="text"
               placeholder="Nome completo"
@@ -45,14 +44,16 @@ export default function CustomerSaleForm({
                   nome: e.target.value,
                 }))
               }
-              className="border rounded-md p-2 shadow-lg border-gray-300"
+              className="border rounded-md p-1.5 shadow-lg border-gray-300 placeholder:text-xs"
             />
           </div>
         </section>
 
         <section className="grid grid-cols-2 gap-2">
           <div className="flex flex-col gap-1">
-            <Label>CPF</Label>
+            <Label className="text-xs">
+              CPF <p className="text-red-500 font-bold">*</p>
+            </Label>
             <input
               type="text"
               placeholder="000.000.000-00"
@@ -63,12 +64,14 @@ export default function CustomerSaleForm({
                   documento: e.target.value,
                 }))
               }
-              className="border rounded-md p-2 shadow-lg border-gray-300"
+              className="border rounded-md p-1.5 shadow-lg border-gray-300 placeholder:text-xs"
             />
           </div>
 
           <div className="flex flex-col gap-1">
-            <Label>Telefone</Label>
+            <Label className="text-xs">
+              Telefone <p className="text-red-500 font-bold">*</p>
+            </Label>
             <input
               type="text"
               placeholder="(00) 00000-0000"
@@ -79,7 +82,7 @@ export default function CustomerSaleForm({
                   telefone: e.target.value,
                 }))
               }
-              className="border rounded-md p-2 shadow-lg border-gray-300"
+              className="border rounded-md p-1.5 shadow-lg border-gray-300 placeholder:text-xs"
             />
           </div>
         </section>
@@ -100,9 +103,10 @@ export default function CustomerSaleForm({
             <div className="space-y-4">
               <section className="grid grid-cols-2 gap-2">
                 <div className="flex flex-col gap-2">
-                  <Label>Documento RG</Label>
+                  <Label className="text-xs">Documento RG</Label>
                   <input
                     type="text"
+                    placeholder="Digite o RG"
                     value={client.rg}
                     onChange={(e) =>
                       setClient((prev) => ({
@@ -110,12 +114,12 @@ export default function CustomerSaleForm({
                         rg: e.target.value,
                       }))
                     }
-                    className="border rounded-md p-2 shadow-lg border-gray-300"
+                    className="border rounded-md p-1.5 shadow-lg border-gray-300 placeholder:text-xs"
                   />
                 </div>
 
                 <div className="flex flex-col gap-2">
-                  <Label>Data de nascimento</Label>
+                  <Label className="text-xs">Data de nascimento</Label>
                   <input
                     type="date"
                     value={client.dataNascimento}
@@ -125,16 +129,17 @@ export default function CustomerSaleForm({
                         dataNascimento: e.target.value,
                       }))
                     }
-                    className="border rounded-md p-2 shadow-lg border-gray-300"
+                    className="border rounded-md p-2 shadow-lg border-gray-300 text-xs"
                   />
                 </div>
               </section>
 
               <section>
                 <div className="flex flex-col gap-2">
-                  <Label>Email</Label>
+                  <Label className="text-xs">Email</Label>
                   <input
                     type="email"
+                    placeholder="exemplo@email.com"
                     value={client.email}
                     onChange={(e) =>
                       setClient((prev) => ({
@@ -142,16 +147,17 @@ export default function CustomerSaleForm({
                         email: e.target.value,
                       }))
                     }
-                    className="border rounded-md p-2 shadow-lg border-gray-300"
+                    className="border rounded-md p-1.5 shadow-lg border-gray-300 placeholder:text-xs"
                   />
                 </div>
               </section>
 
               <section className="grid grid-cols-2 gap-2">
                 <div className="flex flex-col gap-2">
-                  <Label>CEP</Label>
+                  <Label className="text-xs">CEP</Label>
                   <input
                     type="text"
+                    placeholder="00000-000"
                     value={address.cep}
                     onChange={(e) =>
                       setAddress((prev) => ({
@@ -159,12 +165,12 @@ export default function CustomerSaleForm({
                         cep: e.target.value,
                       }))
                     }
-                    className="border rounded-md p-2 shadow-lg border-gray-300"
+                    className="border rounded-md p-1.5 shadow-lg border-gray-300 placeholder:text-xs"
                   />
                 </div>
 
                 <div className="flex flex-col gap-2">
-                  <Label>Estado</Label>
+                  <Label className="text-xs">Estado</Label>
                   <select
                     value={address.estadoId}
                     onChange={(e) =>
@@ -173,9 +179,9 @@ export default function CustomerSaleForm({
                         estadoId: Number(e.target.value),
                       }))
                     }
-                    className="rounded-md p-2 border shadow-lg border-gray-300"
+                    className="rounded-md p-1.5 border shadow-lg border-gray-300 placeholder:text-xs text-xs"
                   >
-                    <option value="">Selecione</option>
+                    <option value="">Selecione o estado</option>
 
                     {states.map((state) => (
                       <option key={state.id} value={state.id}>
@@ -188,9 +194,10 @@ export default function CustomerSaleForm({
 
               <section className="grid grid-cols-2 gap-2">
                 <div className="flex flex-col gap-2">
-                  <Label>Cidade</Label>
+                  <Label className="text-xs">Cidade</Label>
                   <input
                     type="text"
+                    placeholder="Digite a cidade"
                     value={address.cidade}
                     onChange={(e) =>
                       setAddress((prev) => ({
@@ -198,14 +205,15 @@ export default function CustomerSaleForm({
                         cidade: e.target.value,
                       }))
                     }
-                    className="border rounded-md p-2 shadow-lg border-gray-300"
+                    className="border rounded-md p-1.5 shadow-lg border-gray-300 placeholder:text-xs"
                   />
                 </div>
 
                 <div className="flex flex-col gap-2">
-                  <Label>Bairro</Label>
+                  <Label className="text-xs">Bairro</Label>
                   <input
                     type="text"
+                    placeholder="Digite o bairro"
                     value={address.bairro}
                     onChange={(e) =>
                       setAddress((prev) => ({
@@ -213,31 +221,33 @@ export default function CustomerSaleForm({
                         bairro: e.target.value,
                       }))
                     }
-                    className="border rounded-md p-2 shadow-lg border-gray-300"
+                    className="border rounded-md p-1.5 shadow-lg border-gray-300 placeholder:text-xs"
                   />
                 </div>
               </section>
 
               <section className="grid grid-cols-2 gap-2">
                 <div className="flex flex-col gap-2">
-                  <Label>Rua</Label>
+                  <Label className="text-xs">Rua</Label>
                   <input
                     type="text"
+                    placeholder="Digite a rua"
                     value={address.complemento}
                     onChange={(e) =>
                       setAddress((prev) => ({
                         ...prev,
-                        complemento: e.target.value,
+                        rua: e.target.value,
                       }))
                     }
-                    className="border rounded-md p-2 shadow-lg border-gray-300"
+                    className="border rounded-md p-1.5 shadow-lg border-gray-300 placeholder:text-xs"
                   />
                 </div>
 
                 <div className="flex flex-col gap-2">
-                  <Label>Número</Label>
+                  <Label className="text-xs">Número</Label>
                   <input
                     type="text"
+                    placeholder="Ex: 123"
                     value={address.numero}
                     onChange={(e) =>
                       setAddress((prev) => ({
@@ -245,16 +255,17 @@ export default function CustomerSaleForm({
                         numero: e.target.value,
                       }))
                     }
-                    className="border rounded-md p-2 shadow-lg border-gray-300"
+                    className="border rounded-md p-1.5 shadow-lg border-gray-300 placeholder:text-xs"
                   />
                 </div>
               </section>
 
               <section>
                 <div className="flex flex-col gap-2">
-                  <Label>Complemento</Label>
+                  <Label className="text-xs">Complemento</Label>
                   <input
                     type="text"
+                    placeholder="Apartamento, casa, referência..."
                     value={address.complemento}
                     onChange={(e) =>
                       setAddress((prev) => ({
@@ -262,7 +273,7 @@ export default function CustomerSaleForm({
                         complemento: e.target.value,
                       }))
                     }
-                    className="border rounded-md p-2 shadow-lg border-gray-300"
+                    className="border rounded-md p-1.5 shadow-lg border-gray-300 placeholder:text-xs"
                   />
                 </div>
               </section>
