@@ -8,6 +8,8 @@ import TableCard from "../../components/common/TableCard";
 import TableEmpty from "../../components/common/TableEmpty";
 import { Button } from "../../components/ui/button";
 import ProductDetail from "../../components/common/details/ProductDetail";
+import { suppliers } from "../../data/suppliers";
+import { categories } from "../../data/categories";
 
 export default function Product() {
   const gridColumns = "grid grid-cols-[1.3fr_1fr_1fr_1fr_1fr_1fr_1fr]";
@@ -17,6 +19,18 @@ export default function Product() {
 
   const selectedProduct = productList.find(
     (product) => product.id === selectProductId
+  )
+
+  const selectedSupplier = suppliers.find(
+    (supplier) => supplier.id === selectedProduct?.fornecedorId
+  )
+
+  const selectedCut = cuts.find(
+    (cut) => cut.id === selectedProduct?.corteId
+  )
+
+  const selectedCategory = categories.find(
+    (category) => category.id === selectedProduct?.categoriaId
   )
 
   const produtosEmEstoque = productList.filter(
@@ -86,8 +100,8 @@ export default function Product() {
                 <p className="font-medium">{product.nomeProduto}</p>
                 <p className="font-medium">{product.peso} Kg</p>
                 <p className="font-medium">{getCorteNome(product.corteId)}</p>
-                <p className="font-medium">{product.quantidade}</p>
-                <p className="font-medium">R$ {product.precoVenda}</p>
+                <p className="font-medium">{product.quantidade} Un</p>
+                <p className="font-medium">R$ {product.precoVenda.toFixed(2)}</p>
                 <p className="font-medium">{product.dataValidade}</p>
                 <TableActions 
                 onDelet={() => removeProduct(product.id)}
@@ -151,6 +165,9 @@ export default function Product() {
 
       <ProductDetail
       product={selectedProduct}
+      category={selectedCategory}
+      cut={selectedCut}
+      supplier={selectedSupplier}
       onClose={() => setSelectProductId(null)}
       />
     </div>

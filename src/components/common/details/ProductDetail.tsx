@@ -1,14 +1,23 @@
+import { categories } from "../../../data/categories";
+import { cuts } from "../../../data/cuts";
 import { products } from "../../../data/products";
+import { suppliers } from "../../../data/suppliers";
 import DetailsCard from "../DetailsCard";
 
 interface ProductDetailProps {
   product?: (typeof products)[number];
+  supplier?: (typeof suppliers)[number];
+  cut?: (typeof cuts)[number];
+  category?: (typeof categories)[number];
   onClose: () => void;
 }
 
 export default function ProductDetail({
   onClose,
   product,
+  supplier,
+  category,
+  cut,
 }: ProductDetailProps) {
   if (!product) return null;
 
@@ -27,24 +36,24 @@ export default function ProductDetail({
 
           <div className="grid grid-cols-2 gap-x-8 gap-y-4">
             <div className="flex flex-col">
-                <span className="text-sm text-gray-500">Nome Registrado</span>
-                <span className="font-medium">{product.nomeProduto}</span>
+              <span className="text-sm text-gray-500">Nome Registrado</span>
+              <span className="font-medium">{product.nomeProduto}</span>
             </div>
             <div className="flex flex-col">
-                <span className="text-sm text-gray-500">Fornecedor</span>
-                <span className="font-medium">{product.fornecedorId}</span>
+              <span className="text-sm text-gray-500">Fornecedor</span>
+              <span className="font-medium">{supplier?.responsavel}</span>
             </div>
             <div className="flex flex-col">
-                <span className="text-sm text-gray-500">Categoria</span>
-                <span className="font-medium">{product.categoriaId}</span>
+              <span className="text-sm text-gray-500">Categoria</span>
+              <span className="font-medium">{category?.name}</span>
             </div>
             <div className="flex flex-col">
-                <span className="text-sm text-gray-500">Corte</span>
-                <span className="font-medium">{product.corteId}</span>
+              <span className="text-sm text-gray-500">Corte</span>
+              <span className="font-medium">{cut?.nome}</span>
             </div>
             <div className="flex flex-col">
-                <span className="text-sm text-gray-500">Lote</span>
-                <span className="font-medium">{product.lote}</span>
+              <span className="text-sm text-gray-500">Lote</span>
+              <span className="font-medium">{product.lote}</span>
             </div>
           </div>
         </section>
@@ -56,12 +65,12 @@ export default function ProductDetail({
 
           <div className="grid grid-cols-2 gap-x-8 gap-y-4">
             <div className="flex flex-col">
-                <span className="text-sm text-gray-500">Entrada</span>
-                <span className="font-medium">{product.dataEntrada}</span>
+              <span className="text-sm text-gray-500">Entrada</span>
+              <span className="font-medium">{product.dataEntrada}</span>
             </div>
             <div className="flex flex-col">
-                <span className="text-sm text-gray-500">Validade</span>
-                <span className="font-medium">{product.dataValidade}</span>
+              <span className="text-sm text-gray-500">Validade</span>
+              <span className="font-medium">{product.dataValidade}</span>
             </div>
           </div>
         </section>
@@ -73,12 +82,12 @@ export default function ProductDetail({
 
           <div className="grid grid-cols-2 gap-x-8 gap-y-4">
             <div className="flex flex-col">
-                <span className="text-sm text-gray-500">Compra</span>
-                <span className="font-medium">R$ {product.precoCompra}</span>
+              <span className="text-sm text-gray-500">Compra</span>
+              <span className="font-medium">R$ {product.precoCompra}</span>
             </div>
             <div className="flex flex-col">
-                <span className="text-sm text-gray-500">Venda</span>
-                <span className="font-medium">R$ {product.precoVenda}</span>
+              <span className="text-sm text-gray-500">Venda</span>
+              <span className="font-medium">R$ {product.precoVenda}</span>
             </div>
           </div>
         </section>
@@ -90,12 +99,12 @@ export default function ProductDetail({
 
           <div className="grid grid-cols-2 gap-x-8 gap-y-4">
             <div className="flex flex-col">
-                <span className="text-sm text-gray-500">Peso</span>
-                <span className="font-medium">R$ {product.peso}</span>
+              <span className="text-sm text-gray-500">Peso</span>
+              <span className="font-medium">R$ {product.peso}</span>
             </div>
             <div className="flex flex-col">
-                <span className="text-sm text-gray-500">Quantidade</span>
-                <span className="font-medium">R$ {product.quantidade}</span>
+              <span className="text-sm text-gray-500">Quantidade</span>
+              <span className="font-medium">R$ {product.quantidade}</span>
             </div>
           </div>
         </section>

@@ -69,7 +69,7 @@ export default function SupplierDetail({
             </div>
             <div className="flex flex-col">
               <span className="text-sm text-gray-500">E-mail</span>
-              <span className="font-medium">{supplier.email}</span>
+              <span className="font-medium truncate">{supplier.email}</span>
             </div>
           </div>
         </section>

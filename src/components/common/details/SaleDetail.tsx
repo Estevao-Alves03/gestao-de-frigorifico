@@ -155,7 +155,7 @@ export default function SaleDetail({
             </div>
             <div className="flex flex-col">
               <span className="text-sm text-gray-500">E-mail</span>
-              <span className="font-medium">{client.email}</span>
+              <span className="font-medium truncate">{client.email}</span>
             </div>
           </div>
         </section>
